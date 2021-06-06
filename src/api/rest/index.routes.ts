@@ -1,8 +1,6 @@
 import Router from 'express';
-import uploadAvatarRouter from '@rest/upload-avatar/routes';
+import { helloWorldRouter } from '@rest/module/hello-world/routes';
 
-const routes = Router();
+export const routes = Router();
 
-routes.use(uploadAvatarRouter);
-
-export default routes;
+routes.use(helloWorldRouter);
