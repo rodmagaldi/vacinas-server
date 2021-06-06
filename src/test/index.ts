@@ -5,7 +5,5 @@ before(async () => {
   await setup();
 });
 
-// require all test barrels here
-
-require('api/graphql/module/hello-world/test');
-require('api/graphql/module/auth/test');
+// require all test files here
+require('api/rest/module/user/list-users.test');

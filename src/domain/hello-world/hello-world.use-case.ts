@@ -1,11 +1,11 @@
 import { Service } from 'typedi';
-import { HelloWorldModel } from 'domain/model/hello-world.model';
+import { Request, Response } from 'express';
 
 @Service()
 export class HelloWorldUseCase {
-  exec(userId: string): HelloWorldModel {
-    return {
-      helloWorld: userId,
-    };
+  exec(request: Request, response: Response): Response {
+    return response.json({
+      helloWorld: 'Hello, world!',
+    });
   }
 }
