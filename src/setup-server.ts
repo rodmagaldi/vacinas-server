@@ -22,6 +22,7 @@ export async function connectToDatabase() {
       synchronize: false,
       logging: false,
       namingStrategy: new SnakeNamingStrategy(),
+      migrations: ['./src/data/db/migration/*.ts'],
     });
     // Run migrations so test database is properly setup to Github's testing workflow
     if (process.env.NODE_ENV === 'test') {

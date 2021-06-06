@@ -2,7 +2,7 @@
   "name": "vacinas-server",
   "version": "1.0.0",
   "description": "Backend application for Vacinas project",
-  "main": "src/server.ts",
+  "main": "index.js",
   "scripts": {
     "barrels:domain": "barrelsby --directory './src/domain' --delete --singleQuotes --location below",
     "barrels:mock": "barrelsby --directory './src/test/mock' --delete --singleQuotes",
