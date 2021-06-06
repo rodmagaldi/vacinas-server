@@ -5,9 +5,6 @@ export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ default: true })
-  active: boolean;
-
   @Column({ unique: true })
   cpf: string;
 
@@ -15,16 +12,10 @@ export class User {
   email: string;
 
   @Column()
-  password: string;
-
-  @Column()
   firstName: string;
 
   @Column()
   lastName: string;
-
-  @Column({ nullable: true })
-  avatar: string;
 
   @CreateDateColumn()
   createdAt: Date;

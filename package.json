@@ -2,7 +2,7 @@
   "name": "vacinas-server",
   "version": "1.0.0",
   "description": "Backend application for Vacinas project",
-  "main": "index.js",
+  "main": "src/server.ts",
   "scripts": {
     "barrels:domain": "barrelsby --directory './src/domain' --delete --singleQuotes --location below",
     "barrels:mock": "barrelsby --directory './src/test/mock' --delete --singleQuotes",
@@ -19,7 +19,6 @@
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "2.4.3",
-    "class-validator": "0.13.1",
     "cpf": "2.0.1",
     "crypto": "1.0.1",
     "dotenv": "8.2.0",
@@ -27,10 +26,11 @@
     "jsonwebtoken": "8.5.1",
     "pg": "8.5.1",
     "reflect-metadata": "0.1.13",
-    "typedi": "0.10.0",
+    "typedi": "0.8.0",
     "typeorm": "0.2.31",
-    "uuid": "8.3.2",
-    "validator": "13.5.2"
+    "typeorm-naming-strategies": "2.0.0",
+    "typeorm-typedi-extensions": "0.2.3",
+    "uuid": "8.3.2"
   },
   "devDependencies": {
     "@types/chai": "4.2.15",
