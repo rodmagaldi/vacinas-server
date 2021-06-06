@@ -15,7 +15,9 @@ describe('User - list test', async () => {
   });
 
   after(async () => {
-    await getRepository(User).clear();
+    const usersRepository = await getRepository(User);
+    usersRepository.clear();
+    expect(await usersRepository.count()).to.eq(0);
   });
 
   it('Should retrieve a user from the database', async () => {
