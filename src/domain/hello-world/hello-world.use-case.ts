@@ -5,7 +5,7 @@ import { Request, Response } from 'express';
 export class HelloWorldUseCase {
   exec(request: Request, response: Response): Response {
     return response.json({
-      helloWorld: 'Hello, world!',
+      helloWorld: 'Hello World!',
     });
   }
 }
