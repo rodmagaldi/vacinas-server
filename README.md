@@ -23,7 +23,8 @@ In order to run this project, **first** check if you have **nodeJS** properly in
 
 1. Clone the project. `git clone <repo uri>`
 2. Install the dependencies. `yarn`
-3. Run `docker-compose up -d` on the root folder to start the container in detached mode.
-4. Type `yarn dev` to run the server. Auto-reload is on (with ts-node-dev).
+3. Update `.env` files
+4. Run `docker-compose up -d` on the root folder to start the container in detached mode.
+5. Type `yarn dev` to run the server. Auto-reload is on (with ts-node-dev).
 
 To perform the tests, run `yarn test`

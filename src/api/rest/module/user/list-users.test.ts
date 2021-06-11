@@ -20,7 +20,7 @@ describe('User - list test', async () => {
     expect(await usersRepository.count()).to.eq(0);
   });
 
-  it('Should retrieve a user from the database', async () => {
+  it('Should retrieve all users from the database', async () => {
     const response = await request(requestUrl).get('/users');
 
     expect(response.body.length).to.eq(NUMBER_OF_USERS);
