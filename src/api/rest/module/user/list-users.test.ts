@@ -15,7 +15,7 @@ describe('User - list test', async () => {
   });
 
   after(async () => {
-    const usersRepository = await getRepository(User);
+    const usersRepository = getRepository(User);
     usersRepository.clear();
     expect(await usersRepository.count()).to.eq(0);
   });
