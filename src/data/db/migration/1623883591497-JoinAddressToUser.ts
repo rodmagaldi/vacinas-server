@@ -5,7 +5,7 @@ export class JoinAddressToUser1623883591497 implements MigrationInterface {
     await queryRunner.addColumn(
       'users',
       new TableColumn({
-        name: 'addressId',
+        name: 'address_id',
         type: 'uuid',
         isNullable: true,
       }),
@@ -14,7 +14,7 @@ export class JoinAddressToUser1623883591497 implements MigrationInterface {
     await queryRunner.createForeignKey(
       'users',
       new TableForeignKey({
-        columnNames: ['addressId'],
+        columnNames: ['address_id'],
         referencedColumnNames: ['id'],
         referencedTableName: 'addresses',
         onDelete: 'CASCADE',
@@ -24,8 +24,8 @@ export class JoinAddressToUser1623883591497 implements MigrationInterface {
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     const table = await queryRunner.getTable('users');
-    const foreignKey = table.foreignKeys.find((fk) => fk.columnNames.indexOf('addressId') !== -1);
+    const foreignKey = table.foreignKeys.find((fk) => fk.columnNames.indexOf('address_id') !== -1);
     await queryRunner.dropForeignKey('users', foreignKey);
-    await queryRunner.dropColumn('users', 'addressId');
+    await queryRunner.dropColumn('users', 'address_id');
   }
 }

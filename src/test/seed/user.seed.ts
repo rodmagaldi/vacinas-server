@@ -5,7 +5,11 @@ import { User } from '@data/db/entity';
 export async function seedUsers(numberOfUsers: number) {
   const usersRepository = getRepository(User);
   const usersList = await mockUsers(numberOfUsers);
-
   const savedUsers = usersRepository.create(usersList);
-  await usersRepository.save(savedUsers);
+  try {
+    await usersRepository.save(savedUsers);
+  } catch (err) {
+    console.log(err);
+    throw new Error(err);
+  }
 }

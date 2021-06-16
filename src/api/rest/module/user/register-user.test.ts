@@ -9,7 +9,7 @@ import { mockUser } from '@server/test/mock';
 let requestUrl: string;
 let requestBody: CreateUserDTO | Partial<User>;
 
-describe('User - list test', async () => {
+describe('User - register test', async () => {
   before(async () => {
     requestUrl = `http://localhost:${process.env.PORT}`;
     requestBody = mockUser();
