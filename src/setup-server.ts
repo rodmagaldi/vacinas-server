@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 import express from 'express';
+import cors from 'cors';
 import { createConnection, useContainer } from 'typeorm';
 import Container from 'typedi';
 import { envConfig } from 'env-config';
@@ -39,6 +40,7 @@ export async function runServer() {
 
   app.use(express.json());
   app.use(routes);
+  app.use(cors());
 
   app.listen(process.env.PORT, () => console.log(`Server listening on port ${process.env.PORT}\n`));
 }
