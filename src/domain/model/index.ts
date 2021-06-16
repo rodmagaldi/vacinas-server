@@ -3,3 +3,4 @@
  */
 
 export * from './hello-world.model';
+export * from './user.model';

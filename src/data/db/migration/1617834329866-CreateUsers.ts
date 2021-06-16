@@ -47,12 +47,12 @@ export class CreateUsers1617834329866 implements MigrationInterface {
           {
             name: 'gender',
             type: 'enum',
-            enum: ['masculino', 'feminino', 'outro', 'prefiro não informar'],
+            enum: ['masculino', 'feminino', 'outro', 'desconhecido'],
           },
           {
             name: 'race',
             type: 'enum',
-            enum: ['branco', 'preto', 'pardo', 'amarelo', 'indígena'],
+            enum: ['branco', 'preto', 'pardo', 'amarelo', 'indigena', 'outro'],
           },
           {
             name: 'created_at',
