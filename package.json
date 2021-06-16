@@ -6,12 +6,11 @@
   "scripts": {
     "barrels:domain": "barrelsby --directory './src/domain' --delete --singleQuotes --location below",
     "barrels:mock": "barrelsby --directory './src/test/mock' --delete --singleQuotes",
-    "barrels": "yarn barrels:domain && yarn barrels:mock",
+    "barrels:seed": "barrelsby --directory './src/test/seed' --delete --singleQuotes",
+    "barrels": "yarn barrels:domain && yarn barrels:mock && yarn barrels:seed",
     "dev": "ts-node-dev -r tsconfig-paths/register --transpile-only --ignore-watch node_modules src/server.ts",
     "test": "NODE_ENV=test mocha -r ts-node/register -r tsconfig-paths/register --exit --timeout 30000 src/test/index.ts",
     "lint": "eslint --fix --ext .js,.ts src",
-    "seed": "ts-node -r tsconfig-paths/register src/test/seed/index.ts",
-    "seed:test": "NODE_ENV=test ts-node -r tsconfig-paths/register src/test/seed/index.ts",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
   },
   "repository": "https://github.com/rodmagaldi/vacinas-server.git",

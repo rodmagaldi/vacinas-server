@@ -3,27 +3,16 @@ import { getRepository } from 'typeorm';
 import request from 'supertest';
 import { expect } from 'chai';
 import { User } from '@server/data/db/entity';
-import { CreateUserDTO, RaceOptions, GenderOptions } from '@domain/model';
-import * as cpf from 'cpf';
-import { name, internet, phone } from 'faker';
+import { CreateUserDTO } from '@domain/model';
+import { mockUser } from '@server/test/mock';
 
 let requestUrl: string;
-let requestBody: CreateUserDTO;
+let requestBody: CreateUserDTO | Partial<User>;
 
 describe('User - list test', async () => {
   before(async () => {
     requestUrl = `http://localhost:${process.env.PORT}`;
-    requestBody = {
-      firstName: name.firstName(),
-      lastName: name.lastName(),
-      email: internet.email(),
-      cpf: cpf.generate(),
-      cns: cpf.generate(),
-      phone: phone.phoneNumber(),
-      race: RaceOptions.branco,
-      gender: GenderOptions.masculino,
-      motherName: name.firstName(),
-    };
+    requestBody = mockUser();
   });
 
   after(async () => {

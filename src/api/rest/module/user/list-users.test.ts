@@ -2,15 +2,15 @@
 import { getRepository } from 'typeorm';
 import request from 'supertest';
 import { expect } from 'chai';
-import { User } from '@server/data/db/entity';
-import { mockUsers } from '@server/test/mock';
+import { User } from '@data/db/entity';
+import { seedUsers } from '@test/seed';
 
 let requestUrl: string;
 const NUMBER_OF_USERS = 10;
 
 describe('User - list test', async () => {
   before(async () => {
-    await mockUsers(NUMBER_OF_USERS);
+    await seedUsers(NUMBER_OF_USERS);
     requestUrl = `http://localhost:${process.env.PORT}`;
   });
 
