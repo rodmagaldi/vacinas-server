@@ -15,20 +15,44 @@ export class CreateUsers1617834329866 implements MigrationInterface {
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'cpf',
-            type: 'varchar',
-          },
-          {
-            name: 'email',
-            type: 'varchar',
-          },
-          {
             name: 'first_name',
             type: 'varchar',
           },
           {
             name: 'last_name',
             type: 'varchar',
+          },
+          {
+            name: 'cpf',
+            type: 'varchar',
+          },
+          {
+            name: 'cns',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
+            name: 'email',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
+            name: 'phone',
+            type: 'varchar',
+          },
+          {
+            name: 'mother_name',
+            type: 'varchar',
+          },
+          {
+            name: 'gender',
+            type: 'enum',
+            enum: ['masculino', 'feminino', 'outro', 'prefiro não informar'],
+          },
+          {
+            name: 'race',
+            type: 'enum',
+            enum: ['branco', 'preto', 'pardo', 'amarelo', 'indígena'],
           },
           {
             name: 'created_at',
