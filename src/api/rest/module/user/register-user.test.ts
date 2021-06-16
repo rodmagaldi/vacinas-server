@@ -32,21 +32,27 @@ describe('User - list test', async () => {
     expect(await usersRepository.count()).to.eq(0);
   });
 
-  it('Should retrieve all users from the database', async () => {
+  it('Should create user in database', async () => {
     const response = await request(requestUrl).post('/users/register').send(requestBody);
-
-    expect(response.body.firstName).to.eq(requestBody.firstName);
-    expect(response.body.lastName).to.eq(requestBody.lastName);
-    expect(response.body.cpf).to.eq(requestBody.cpf);
-    expect(response.body.cns).to.eq(requestBody.cns);
-    expect(response.body.email).to.eq(requestBody.email);
-    expect(response.body.phone).to.eq(requestBody.phone);
-    expect(response.body.race).to.eq(requestBody.race);
-    expect(response.body.gender).to.eq(requestBody.gender);
-    expect(response.body.motherName).to.eq(requestBody.motherName);
+    checkUser(response.body);
 
     const usersRepository = getRepository(User);
     const numberOfDBUsers = await usersRepository.count();
     expect(numberOfDBUsers).to.eq(1);
+
+    const DBUser = await usersRepository.findOne({ id: response.body.id });
+    checkUser(DBUser);
   });
 });
+
+const checkUser = (user: Partial<User>): void => {
+  expect(user.firstName).to.eq(requestBody.firstName);
+  expect(user.lastName).to.eq(requestBody.lastName);
+  expect(user.cpf).to.eq(requestBody.cpf);
+  expect(user.cns).to.eq(requestBody.cns);
+  expect(user.email).to.eq(requestBody.email);
+  expect(user.phone).to.eq(requestBody.phone);
+  expect(user.race).to.eq(requestBody.race);
+  expect(user.gender).to.eq(requestBody.gender);
+  expect(user.motherName).to.eq(requestBody.motherName);
+};
