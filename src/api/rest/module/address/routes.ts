@@ -4,12 +4,19 @@ import Router from 'express';
 import Container from 'typedi';
 import { Request, Response } from 'express';
 import { GetAddressFromPostalCodeUseCase } from '@domain/address';
+import { body } from 'express-validator';
+import { isValidPostalCode, validate } from '@rest/common';
 
 export const addressRouter = Router();
 
 const getAddressFromPostalCodeUseCase = Container.get(GetAddressFromPostalCodeUseCase);
 
-addressRouter.patch('/postal-code', async (req: Request, res: Response) => {
-  const response = await getAddressFromPostalCodeUseCase.exec(req.body);
-  return res.json(response);
-});
+const postalCodeValidators = [body('postalCode').custom(isValidPostalCode)];
+addressRouter.patch(
+  '/postal-code',
+  validate(postalCodeValidators, 'CEP inválido. Digite apenas 8 números.'),
+  async (req: Request, res: Response) => {
+    const response = await getAddressFromPostalCodeUseCase.exec(req.body);
+    return res.json(response);
+  },
+);

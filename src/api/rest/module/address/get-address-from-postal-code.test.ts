@@ -7,7 +7,9 @@ import { checkError } from '@test/checker';
 let requestUrl: string;
 let requestBody;
 const postalCode = '04016002';
-const invalidPostalCode = '000000';
+const invalidPostalCode = '99999999';
+const badPostalCode1 = '000';
+const badPostalCode2 = '04016-002';
 
 describe('Address - get address from postal code test', async () => {
   before(async () => {
@@ -20,9 +22,17 @@ describe('Address - get address from postal code test', async () => {
     checkAddress(response.body);
   });
 
-  it('Should throw error for invalid postal code', async () => {
+  it('Should throw error for non-existing postal code', async () => {
     const response = await request(requestUrl).patch('/address/postal-code').send({ postalCode: invalidPostalCode });
     checkError(response, 'Não foi possível obter o endereço.');
+  });
+
+  it('Should throw error for bad postal codes', async () => {
+    let response = await request(requestUrl).patch('/address/postal-code').send({ postalCode: badPostalCode1 });
+    checkError(response, 'CEP inválido. Digite apenas 8 números.');
+
+    response = await request(requestUrl).patch('/address/postal-code').send({ postalCode: badPostalCode2 });
+    checkError(response, 'CEP inválido. Digite apenas 8 números.');
   });
 });
 
