@@ -1,6 +1,7 @@
 import { mockUsers } from '@test/mock';
 import { getRepository } from 'typeorm';
 import { User } from '@data/db/entity';
+import { BaseError } from '@server/error/error';
 
 export async function seedUsers(numberOfUsers: number) {
   const usersRepository = getRepository(User);
@@ -10,6 +11,6 @@ export async function seedUsers(numberOfUsers: number) {
     await usersRepository.save(savedUsers);
   } catch (err) {
     console.log(err);
-    throw new Error(err);
+    throw new BaseError('Não foi possível realizar o seed.');
   }
 }

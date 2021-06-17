@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
-import { validationResult } from 'express-validator';
+import { validationResult, ValidationChain } from 'express-validator';
 import { BaseError } from '@server/error/error';
 
-export const validate = (checks: any, message: string) => [
+export const validate = (checks: ValidationChain[], message: string) => [
   ...checks,
   (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req);
