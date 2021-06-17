@@ -33,7 +33,7 @@ export async function connectToDatabase() {
     }
     console.log('Database connection successful');
   } catch (err) {
-    throw new Error(err.message);
+    throw new BaseError(err.message);
   }
 }
 
