@@ -11,12 +11,10 @@ export const addressRouter = Router();
 
 const getAddressFromPostalCodeUseCase = Container.get(GetAddressFromPostalCodeUseCase);
 
-const postalCodeValidators = [body('postalCode').custom(isValidPostalCode)];
-addressRouter.patch(
-  '/postal-code',
-  validate(postalCodeValidators, 'CEP inválido. Digite apenas 8 números.'),
-  async (req: Request, res: Response) => {
-    const response = await getAddressFromPostalCodeUseCase.exec(req.body);
-    return res.json(response);
-  },
-);
+const postalCodeValidators = [
+  body('postalCode').custom(isValidPostalCode).withMessage('CEP inválido. Digite apenas 8 números.'),
+];
+addressRouter.patch('/postal-code', validate(postalCodeValidators), async (req: Request, res: Response) => {
+  const response = await getAddressFromPostalCodeUseCase.exec(req.body);
+  return res.json(response);
+});
