@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import request from 'supertest';
 import { expect } from 'chai';
-import { Address } from '@server/data/db/entity';
+import { Address } from '@data/db/entity';
+import { checkError } from '@test/checker';
 
 let requestUrl: string;
 let requestBody;
 const postalCode = '04016002';
+const invalidPostalCode = '000000';
 
 describe('Address - get address from postal code test', async () => {
   before(async () => {
@@ -16,6 +18,11 @@ describe('Address - get address from postal code test', async () => {
   it('Should retrieve address info when passing postal code', async () => {
     const response = await request(requestUrl).patch('/address/postal-code').send(requestBody);
     checkAddress(response.body);
+  });
+
+  it('Should throw error for invalid postal code', async () => {
+    const response = await request(requestUrl).patch('/address/postal-code').send({ postalCode: invalidPostalCode });
+    checkError(response, 'Não foi possível obter o endereço.');
   });
 });
 
