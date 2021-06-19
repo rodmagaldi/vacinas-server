@@ -5,9 +5,7 @@
   "username": "admin",
   "password": "admin",
   "database": "localdb",
-  "migrations": [
-     "./src/data/db/migration/*.ts"
-  ],
+  "migrations": ["./src/data/db/migration/*.ts"],
   "cli": {
     "migrationsDir": "./src/data/db/migration"
   }

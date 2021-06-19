@@ -1,10 +1,13 @@
 import 'reflect-metadata';
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
+import 'express-async-errors';
+import cors from 'cors';
 import { createConnection, useContainer } from 'typeorm';
 import Container from 'typedi';
 import { envConfig } from 'env-config';
 import { routes } from '@rest/index.routes';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
+import { BaseError } from './error/error';
 
 export async function setup() {
   envConfig();
@@ -30,7 +33,7 @@ export async function connectToDatabase() {
     }
     console.log('Database connection successful');
   } catch (err) {
-    throw err;
+    throw new BaseError(err.message);
   }
 }
 
@@ -39,6 +42,24 @@ export async function runServer() {
 
   app.use(express.json());
   app.use(routes);
+  app.use(cors());
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  app.use((err: Error, req: Request, res: Response, _: NextFunction) => {
+    if (err instanceof BaseError) {
+      return res.status(err.code).json({
+        status: 'error',
+        message: err.message,
+      });
+    }
+
+    console.log(err);
+
+    return res.status(500).json({
+      status: 'error',
+      message: 'Internal Server Error',
+    });
+  });
 
   app.listen(process.env.PORT, () => console.log(`Server listening on port ${process.env.PORT}\n`));
 }

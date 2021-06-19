@@ -1,25 +1,14 @@
-import { JwtService } from '@server/core/jwt/jwt.service';
-import { ErrorType } from '@server/error/error';
+import request from 'supertest';
 import { expect } from 'chai';
 import Container from 'typedi';
-import { GraphQLResponse } from './request-maker';
+import { JwtService } from '@server/core/jwt/jwt.service';
 
-export function checkError(res: GraphQLResponse<any>, errorType: ErrorType, code: number, message?: string): void {
-  expect(res.body.data).to.be.null;
-  expect(res.body.errors[0].name).to.be.eq(ErrorType[errorType]);
-  expect(res.body.errors[0].code).to.be.eq(code);
-
-  if (message) {
-    expect(res.body.errors[0].message).to.be.eq(message);
-  }
+export function checkError(res: request.Response, message?: string, code = 400): void {
+  expect(res.body).to.deep.eq({ status: 'error', message });
+  expect(res.status).to.eq(code);
 }
 
-export function checkValidationError(
-  res: GraphQLResponse<any>,
-  errorName: string,
-  code: number,
-  message?: string,
-): void {
+export function checkValidationError(res: request.Response, errorName: string, code: number, message?: string): void {
   expect(res.body.data).to.be.null;
   expect(res.body.errors[0].name).to.be.eq(errorName);
   expect(res.body.errors[0].code).to.be.eq(code);
