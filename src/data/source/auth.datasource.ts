@@ -1,6 +1,6 @@
 import { Service } from 'typedi';
 import { getRepository } from 'typeorm';
-import { User } from '../db/entity';
+import { User, Address } from '../db/entity';
 import { CreateUserDTO } from '@domain/model';
 
 @Service()
@@ -12,9 +12,16 @@ export class AuthDatasource {
   };
 
   createUser = async (input: CreateUserDTO): Promise<User> => {
-    const repository = getRepository(User);
-    const user = repository.create(input);
-    await repository.save(user);
-    return user;
+    const userRepository = getRepository(User);
+    const addressRepository = getRepository(Address);
+
+    const address = addressRepository.create(input.address);
+    const savedAddress = await addressRepository.save(address);
+
+    const user = userRepository.create(input.user);
+    user.address = savedAddress;
+    const savedUser = await userRepository.save(user);
+
+    return savedUser;
   };
 }

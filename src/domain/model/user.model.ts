@@ -1,4 +1,4 @@
-import { User } from '@server/data/db/entity';
+import { User, Address } from '@server/data/db/entity';
 
 export enum GenderOptions {
   masculino = 'masculino',
@@ -16,14 +16,29 @@ export enum RaceOptions {
   outro = 'outro',
 }
 
-export interface CreateUserDTO extends Partial<User> {
-  firstName: string;
-  lastName: string;
-  cpf: string;
+export interface CreateUserDTO {
+  user: UserInfoDTO;
+  address: AddressInfoDTO;
+}
+
+interface UserInfoDTO extends Partial<User> {
+  firstName?: string;
+  lastName?: string;
+  cpf?: string;
   cns?: string;
-  email: string;
-  phone: string;
-  motherName: string;
-  gender: GenderOptions;
-  race: RaceOptions;
+  email?: string;
+  phone?: string;
+  motherName?: string;
+  gender?: GenderOptions;
+  race?: RaceOptions;
+}
+
+interface AddressInfoDTO extends Partial<Address> {
+  postalCode?: string;
+  state?: string;
+  city?: string;
+  neighborhood?: string;
+  streetName?: string;
+  streetNumber?: string;
+  complement?: string;
 }
