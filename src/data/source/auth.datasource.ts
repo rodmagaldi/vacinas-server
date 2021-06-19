@@ -1,6 +1,6 @@
 import { Service } from 'typedi';
 import { getRepository } from 'typeorm';
-import { User, Address } from '../db/entity';
+import { User, Address } from '@data/db/entity';
 import { CreateUserDTO } from '@domain/model';
 
 @Service()

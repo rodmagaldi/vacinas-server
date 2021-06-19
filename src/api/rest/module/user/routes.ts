@@ -20,9 +20,5 @@ userRouter.post('/register', async (req: Request, res: Response) => {
 });
 
 // TODO:
-// - enviar infos de endereco no request de criacao de usuario
-//   - deve ter validacao? e se for no caso sem internet?
-//   - poderia cair no caso de ter coletado dados que nao vao poder ser validados no final
-// - atualizar e completar casos de teste
 // - APIs para validacao de um campo por vez? (cpf, teleofne...)
 // - documentacao (swagger?)
