@@ -25,7 +25,7 @@ export async function connectToDatabase() {
       synchronize: false,
       logging: false,
       namingStrategy: new SnakeNamingStrategy(),
-      migrations: ['./src/data/db/migration/*.ts'],
+      migrations: [__dirname + '/data/db/migration/*.{ts,js}'],
     });
     // Run migrations so test database is properly setup to Github's testing workflow
     if (process.env.NODE_ENV === 'test') {
@@ -33,7 +33,8 @@ export async function connectToDatabase() {
     }
     console.log('Database connection successful');
   } catch (err) {
-    throw new BaseError(err.message);
+    console.log(err);
+    throw new Error(err);
   }
 }
 
