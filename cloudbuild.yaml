@@ -1,26 +1,25 @@
 steps:
   - name: gcr.io/cloud-builders/docker
-    args: ['build', '-t', 'gcr.io/$PROJECT_ID/vacinas-server', '.']
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/${_SERVICE_NAME}:${SHORT_SHA}', '.']
 
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/$PROJECT_ID/vacinas-server']
+    args: ['push', 'gcr.io/$PROJECT_ID/${_SERVICE_NAME}']
 
   - name: 'gcr.io/cloud-builders/gcloud'
     entrypoint: 'bash'
     args: [
         '-c',
-        'gcloud run deploy vacinas-server
-        --image gcr.io/$PROJECT_ID/vacinas-server
+        'gcloud run deploy ${_SERVICE_NAME}
+        --image gcr.io/$PROJECT_ID/${_SERVICE_NAME}:${SHORT_SHA}
         --vpc-connector projects/$PROJECT_ID/locations/us-central1/connectors/dev-connector
         --region us-central1
         --allow-unauthenticated
         --platform managed
         --memory=256Mi
         --set-env-vars DATABASE_URL=$$DATABASE_URL
-        --set-env-vars NODE_ENV=$$NODE_ENV
-        --set-env-vars PORT=$$PORT',
+        --set-env-vars NODE_ENV=$$NODE_ENV',
       ]
-    secretEnv: ['DATABASE_URL', 'NODE_ENV', 'PORT']
+    secretEnv: ['DATABASE_URL', 'NODE_ENV']
 timeout: 900s
 availableSecrets:
   secretManager:
@@ -28,5 +27,3 @@ availableSecrets:
       env: 'DATABASE_URL'
     - versionName: projects/313400536121/secrets/NODE_ENV/versions/latest
       env: 'NODE_ENV'
-    - versionName: projects/313400536121/secrets/PORT/versions/latest
-      env: 'PORT'
