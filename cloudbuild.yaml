@@ -11,6 +11,7 @@ steps:
         '-c',
         'gcloud run deploy ${_SERVICE_NAME}
         --image gcr.io/$PROJECT_ID/${_SERVICE_NAME}:${SHORT_SHA}
+        --vpc-connector projects/$PROJECT_ID/locations/us-central1/connectors/dev-connector
         --region us-central1
         --allow-unauthenticated
         --platform managed
