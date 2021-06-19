@@ -1,16 +1,7 @@
 import { JwtService } from '@server/core/jwt/jwt.service';
-import { ServerError } from '@server/error/error';
 import { expect } from 'chai';
-import { print } from 'graphql';
 import request from 'supertest';
 import { Container } from 'typedi';
-
-export interface GraphQLResponse<T> extends request.Response {
-  body: {
-    data?: T;
-    errors?: ServerError[];
-  };
-}
 
 export class RequestMaker {
   token: string = null;
@@ -32,12 +23,12 @@ export class RequestMaker {
     this.token = null;
   }
 
-  async postGraphQL<T, I = any>(
+  async postGraphQL<I = any>(
     query: any,
     variables?: I,
     token?: string,
     expectedStatus = 200,
-  ): Promise<GraphQLResponse<T>> {
+  ): Promise<request.Response> {
     const agent = request(`http://localhost:${this.port}`).post('/graphql');
 
     if (token) {
@@ -47,10 +38,6 @@ export class RequestMaker {
     }
 
     agent.set('Content-Type', 'application/json');
-
-    if (query.kind === 'Document') {
-      query = print(query);
-    }
 
     return agent.send({ query, variables }).expect(this.checkStatus(expectedStatus));
   }
