@@ -17,9 +17,10 @@ steps:
         --platform managed
         --memory=256Mi
         --set-env-vars DATABASE_URL=$$DATABASE_URL
-        --set-env-vars NODE_ENV=$$NODE_ENV',
+        --set-env-vars NODE_ENV=$$NODE_ENV
+        --set-env-vars PORT=$$PORT',
       ]
-    secretEnv: ['DATABASE_URL', 'NODE_ENV']
+    secretEnv: ['DATABASE_URL', 'NODE_ENV', 'PORT']
 timeout: 900s
 availableSecrets:
   secretManager:
@@ -27,3 +28,5 @@ availableSecrets:
       env: 'DATABASE_URL'
     - versionName: projects/313400536121/secrets/NODE_ENV/versions/latest
       env: 'NODE_ENV'
+    - versionName: projects/313400536121/secrets/PORT/versions/latest
+      env: 'PORT'
