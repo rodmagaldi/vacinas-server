@@ -7,7 +7,7 @@ import { CreateUserDTO } from '@domain/model';
 export class AuthDatasource {
   listUsers = async (): Promise<User[]> => {
     const repository = getRepository(User);
-    const users = await repository.find();
+    const users = await repository.find({ relations: ['address'] });
     return users;
   };
 
