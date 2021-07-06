@@ -3,4 +3,5 @@
  */
 
 export * from './list-users.use-case';
+export * from './register-multiple-user.use-case';
 export * from './register-user.use-case';
