@@ -1,4 +1,4 @@
-import { address, random } from 'faker';
+import { address, datatype as random } from 'faker';
 import { Address } from '@data/db/entity';
 
 export async function mockAddresses(numberOfUsers: number): Promise<Partial<Address[]>> {

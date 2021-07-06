@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { Service } from 'typedi';
 import { getRepository } from 'typeorm';
 import { User, Address } from '@data/db/entity';
@@ -23,5 +24,16 @@ export class AuthDatasource {
     const savedUser = await userRepository.save(user);
 
     return savedUser;
+  };
+
+  createMultipleUser = async (input: CreateUserDTO[]): Promise<User[]> => {
+    const users: User[] = [];
+
+    for (const element of input) {
+      const savedUser = await this.createUser(element);
+      users.push(savedUser);
+    }
+
+    return users;
   };
 }
