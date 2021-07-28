@@ -21,6 +21,8 @@ Dev Tools:
 
 In order to run this project, **first** check if you have **nodeJS** properly installed on your machine by typing `node -v` into a terminal. `nvm use` ensures you are using the correct NodeJS version. Also make sure your **docker** instalation is OK by typing `docker -v`.
 
+Make sure to run the ***develop*** branch.
+
 1. Clone the project. `git clone <repo uri>`
 2. Install the dependencies. `yarn`
 3. Update `.env` files
