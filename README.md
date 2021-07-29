@@ -4,6 +4,8 @@
 
 Backend server application for the Vacinas project. [PostgreSQL](https://www.postgresql.org/about/) database managed by [typeORM](https://typeorm.io/#/) runs on a [docker](https://www.docker.com/) container. **Docker-compose won't run on Windows OS!** Preferrably, run this software on an Unix-based OS.
 
+Server currently running can be access via this [link](https://vacinas-app-mhanprpxzq-uc.a.run.app/hello-world) - remember, there is a cold start!
+
 ## Environment and tools
 
 - Typescript
